@@ -4,6 +4,7 @@ import com.vkdev.urlshortner.dtos.ShortCodeRequestDTO;
 import com.vkdev.urlshortner.models.URLEntity;
 import com.vkdev.urlshortner.repositories.URLRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
