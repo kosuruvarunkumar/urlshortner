@@ -17,6 +17,7 @@ public class URLService {
     @Autowired
     private URLRepository urlRepository;
 
+    @Cacheable(value = "urls", key = "#shortCode")
     public URLEntity getURLFromShortCode(String shortCode) {
         return urlRepository.findByShortCode(shortCode).getFirst();
     }
