@@ -1,6 +1,7 @@
 package com.vkdev.urlshortner.services;
 
 import com.vkdev.urlshortner.dtos.ShortCodeRequestDTO;
+import com.vkdev.urlshortner.exceptions.ResourceNotFound;
 import com.vkdev.urlshortner.models.URLEntity;
 import com.vkdev.urlshortner.repositories.URLRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ public class URLService {
     private URLRepository urlRepository;
 
     @Cacheable(value = "urls", key = "#shortCode")
-    public URLEntity getURLFromShortCode(String shortCode) {
-        return urlRepository.findByShortCode(shortCode).getFirst();
+    public String getURLFromShortCode(String shortCode) {
+        URLEntity urlEntity = urlRepository.findByShortCode(shortCode).orElseThrow(ResourceNotFound::new);
+        return urlEntity.getUrl();
     }
 
     public URLEntity createShortCode(ShortCodeRequestDTO requestDTO) {

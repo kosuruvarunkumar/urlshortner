@@ -4,6 +4,8 @@ import com.vkdev.urlshortner.dtos.ShortCodeRequestDTO;
 import com.vkdev.urlshortner.models.URLEntity;
 import com.vkdev.urlshortner.services.URLService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,12 @@ public class URLController {
     URLService urlService;
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<URLEntity> getURLFromShortCode(@PathVariable String shortCode) {
-        return new ResponseEntity<>(urlService.getURLFromShortCode(shortCode), HttpStatusCode.valueOf(200));
+    public ResponseEntity<Void> getURLFromShortCode(@PathVariable String shortCode) {
+        String newLocation = urlService.getURLFromShortCode(shortCode);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", newLocation);
+
+        return new ResponseEntity<>(headers, HttpStatus.TEMPORARY_REDIRECT);
     }
 
     @PostMapping
