@@ -19,8 +19,6 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-//    @Value("${spring.kafka.producer.key-serializer}")
-//    @Value("${spring.kafka.producer.value-serializer}")
     @Value("${spring.kafka.producer.acks}")
     private String acksConfig;
     @Value("${spring.kafka.producer.compression-type}")
