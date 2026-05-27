@@ -1,6 +1,5 @@
 package com.vkdev.urlshortner.services;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vkdev.urlshortner.models.ClickEvent;
 import com.vkdev.urlshortner.producers.ClickEventProducer;
 import jakarta.servlet.http.HttpServletRequest;
