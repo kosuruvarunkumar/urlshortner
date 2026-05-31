@@ -57,4 +57,3 @@ public class URLService {
         return hexString.substring(0, 8);
     }
 }
-
